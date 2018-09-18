@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="我去testbuyong gai domian $E=mc^2$">
-<meta name="keywords" content="OpenCV,ml,机器学习">
+  <meta name="description" content="Mission 1-图片数据库的收集（1/1）https://zhuanlan.zhihu.com/p/20787086https://zhuanlan.zhihu.com/p/44204713李飞飞教授的cifar-10等数据库kaggle比赛（二分类比赛数据）BSDS500伯克利大学的数据集（生物图片分割）采用图片区域增强的方法（使用最小二乘法来进行图片变形①），这种图片可以提高图片分割的样本">
+<meta name="keywords" content="machine learning,deep learning,图片算法,CNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="record918">
 <meta property="og:url" content="https://zjkfly.github.io/2018/09/18/record918/index.html">
 <meta property="og:site_name" content="老张的blog">
-<meta property="og:description" content="我去testbuyong gai domian $E=mc^2$">
+<meta property="og:description" content="Mission 1-图片数据库的收集（1/1）https://zhuanlan.zhihu.com/p/20787086https://zhuanlan.zhihu.com/p/44204713李飞飞教授的cifar-10等数据库kaggle比赛（二分类比赛数据）BSDS500伯克利大学的数据集（生物图片分割）采用图片区域增强的方法（使用最小二乘法来进行图片变形①），这种图片可以提高图片分割的样本">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-18T12:51:43.350Z">
+<meta property="og:updated_time" content="2018-09-18T13:36:54.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="record918">
-<meta name="twitter:description" content="我去testbuyong gai domian $E=mc^2$">
+<meta name="twitter:description" content="Mission 1-图片数据库的收集（1/1）https://zhuanlan.zhihu.com/p/20787086https://zhuanlan.zhihu.com/p/44204713李飞飞教授的cifar-10等数据库kaggle比赛（二分类比赛数据）BSDS500伯克利大学的数据集（生物图片分割）采用图片区域增强的方法（使用最小二乘法来进行图片变形①），这种图片可以提高图片分割的样本">
 
 
 
@@ -327,7 +327,7 @@
                 
               
 
-              <time title="创建时间：2018-09-18 20:10:54 / 修改时间：20:51:43" itemprop="dateCreated datePublished" datetime="2018-09-18T20:10:54+08:00">2018-09-18</time>
+              <time title="创建时间：2018-09-18 20:10:54 / 修改时间：21:36:54" itemprop="dateCreated datePublished" datetime="2018-09-18T20:10:54+08:00">2018-09-18</time>
             
 
             
@@ -365,8 +365,51 @@
       
 
       
-        <h1 id="我去test"><a href="#我去test" class="headerlink" title="我去test"></a>我去test</h1><p>buyong gai domian</p>
-<h2 id="E-mc-2"><a href="#E-mc-2" class="headerlink" title="$E=mc^2$"></a>$E=mc^2$</h2>
+        <h1 id="Mission-1-图片数据库的收集（1-1）"><a href="#Mission-1-图片数据库的收集（1-1）" class="headerlink" title="Mission 1-图片数据库的收集（1/1）"></a>Mission 1-图片数据库的收集（1/1）</h1><p><a><a href="https://zhuanlan.zhihu.com/p/20787086" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/20787086</a></a><br><a><a href="https://zhuanlan.zhihu.com/p/44204713" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/44204713</a></a><br>李飞飞教授的cifar-10等数据库<br>kaggle比赛（二分类比赛数据）<br>BSDS500伯克利大学的数据集（生物图片分割）<br>采用图片区域增强的方法（使用最小二乘法来进行图片变形<sup>①</sup>），这种图片可以提高图片分割的样本训练集</p>
+<h1 id="Mission-2-了解U-net-1-1"><a href="#Mission-2-了解U-net-1-1" class="headerlink" title="Mission 2-了解U-net(1/1)"></a>Mission 2-了解U-net(1/1)</h1><p>看了U-net的论文（U-Net: Convolutional Networks for Biomedical Image Segmentation），主要是用来做生物图像分割，论文讲解了网络结构层，采用了上采样（双线插值，线性插值）和下采样（池化层，maxpool），端对端的技术，但是深度学习的一个令人遗憾的是，它是个不明所以的盒子。U-net优点是1.训练样本不用太多。2.上采样，增加了分辨率（端对端）。</p>
+<h1 id="Mission-3-应用CNN"><a href="#Mission-3-应用CNN" class="headerlink" title="Mission 3-应用CNN"></a>Mission 3-应用CNN</h1><p>端到端，不需要做更多的图片预处理（比如图片字符切割、图片尺寸归一化、图片字符标记、字符图片特征提取）<br>验证码是阿拉伯数字<br>采用自己生成的验证码来作为神经网络的训练集合、测试集合、预测集合<br>纯四位数字，验证码识别率 93 %<br>深度学习框架pytorch + 验证码生成器ImageCaptcha<br>代码：本地<br>网络结构采用的是</p>
+<pre><code>class CNN(nn.Module):
+    def __init__(self):
+        super(CNN, self).__init__()
+        self.layer1 = nn.Sequential(
+            nn.Conv2d(1, 32, kernel_size=3, padding=1),
+            nn.BatchNorm2d(32),
+            nn.Dropout(0.5),  # drop 50% of the neuron
+            nn.ReLU(),
+            nn.MaxPool2d(2))
+        self.layer2 = nn.Sequential(
+            nn.Conv2d(32, 64, kernel_size=3, padding=1),
+            nn.BatchNorm2d(64),
+            nn.Dropout(0.5),  # drop 50% of the neuron
+            nn.ReLU(),
+            nn.MaxPool2d(2))
+        self.layer3 = nn.Sequential(
+            nn.Conv2d(64, 64, kernel_size=3, padding=1),
+            nn.BatchNorm2d(64),
+            nn.Dropout(0.5),  # drop 50% of the neuron
+            nn.ReLU(),
+            nn.MaxPool2d(2))
+        self.fc = nn.Sequential(
+            nn.Linear((captcha_setting.IMAGE_WIDTH//8)*(captcha_setting.IMAGE_HEIGHT//8)*64, 1024),
+            nn.Dropout(0.5),  # drop 50% of the neuron
+            nn.ReLU())
+        self.rfc = nn.Sequential(
+            nn.Linear(1024, captcha_setting.MAX_CAPTCHA*captcha_setting.ALL_CHAR_SET_LEN),
+        )
+
+    def forward(self, x):
+        out = self.layer1(x)
+        out = self.layer2(out)
+        out = self.layer3(out)
+        out = out.view(out.size(0), -1)
+        out = self.fc(out)
+        out = self.rfc(out)
+        return out
+</code></pre><p>`<br>三层hidden layer<br>三层sample layer（maxpool）<br>激励函数relu等等，不多赘述。</p>
+<h1 id="杂记"><a href="#杂记" class="headerlink" title="杂记"></a>杂记</h1><h2 id="水滴算法"><a href="#水滴算法" class="headerlink" title="水滴算法"></a>水滴算法</h2><p>一个很重要的解决图片验证码粘连应用算法。（下次专门再讲）</p>
+<h2 id="数值投影法"><a href="#数值投影法" class="headerlink" title="数值投影法"></a>数值投影法</h2><p>一个也很重要的解决图片验证码粘连应用算法。（论文名称：粘连字符验证码的识别研究），论文看完了，原理挺容易的。</p>
+<h2 id="交叉熵损失函数"><a href="#交叉熵损失函数" class="headerlink" title="交叉熵损失函数"></a>交叉熵损失函数</h2><p><a><a href="https://blog.csdn.net/weixin_39585152/article/details/79405474" target="_blank" rel="noopener">https://blog.csdn.net/weixin_39585152/article/details/79405474</a></a><br>作用：判定实际的输出与期望的输出的接近程度，搭配softmax风味更佳。</p>
+
       
     </div>
 
@@ -383,6 +426,18 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+          
+            <a href="/tags/deep-learning/" rel="tag"># deep learning</a>
+          
+            <a href="/tags/图片算法/" rel="tag"># 图片算法</a>
+          
+            <a href="/tags/CNN/" rel="tag"># CNN</a>
+          
+        </div>
       
 
       
@@ -502,7 +557,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -538,7 +597,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我去test"><span class="nav-number">1.</span> <span class="nav-text">我去test</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#E-mc-2"><span class="nav-number">1.1.</span> <span class="nav-text">$E=mc^2$</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mission-1-图片数据库的收集（1-1）"><span class="nav-number">1.</span> <span class="nav-text">Mission 1-图片数据库的收集（1/1）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mission-2-了解U-net-1-1"><span class="nav-number">2.</span> <span class="nav-text">Mission 2-了解U-net(1/1)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mission-3-应用CNN"><span class="nav-number">3.</span> <span class="nav-text">Mission 3-应用CNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#杂记"><span class="nav-number">4.</span> <span class="nav-text">杂记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#水滴算法"><span class="nav-number">4.1.</span> <span class="nav-text">水滴算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值投影法"><span class="nav-number">4.2.</span> <span class="nav-text">数值投影法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵损失函数"><span class="nav-number">4.3.</span> <span class="nav-text">交叉熵损失函数</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -736,30 +795,6 @@
   
   
 
-  
-    
-      <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      },
-      TeX: {equationNumbers: { autoNumber: "AMS" }}
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-    
   
 
 
